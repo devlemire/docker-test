@@ -11,12 +11,12 @@ before_install:
 - mv id_rsa ~/.ssh/id_rsa
 - cd public
 install:
-- npm install
+- yarn
 before_script:
 - cd public
 script:
-- npm run build
-- npm test
+- yarn build
+- yarn test
 after_success:
 - if [ "$TRAVIS_PULL_REQUEST" == false ]; then 
     ssh deploy@198.199.116.198 'bash -s' < "$TRAVIS_BUILD_DIR/deploy.sh";
