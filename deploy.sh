@@ -1,7 +1,5 @@
-#! /usr/bin/env sh
+#!/bin/sh
 set -x
-
-export NODE_ENV=production
 
 cd ~/docker-test
 git pull
