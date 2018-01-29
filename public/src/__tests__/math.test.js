@@ -4,6 +4,6 @@ describe('Math Functions', () => {
   });
 
   it('should subtract two numbers together', () => {
-    expect( 2 - 2 ).toEqual( 4 );
+    expect( 2 - 2 ).toEqual( 0 );
   });
 });
