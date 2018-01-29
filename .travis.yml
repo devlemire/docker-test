@@ -11,6 +11,6 @@ script:
   - npm run build
   - npm test
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master "]]; then console.log('it works')
+  - if [[ "$TRAVIS_BRANCH" == "master "]]; then echo it works; fi
 notifications:
   email: false
