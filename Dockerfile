@@ -1,4 +1,4 @@
-FROM beevelop/nodejs-python 
+FROM mhart/alpine-node
 
 MAINTAINER DevMountain
  
