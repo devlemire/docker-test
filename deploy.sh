@@ -4,8 +4,6 @@ set -x
 cd ~/docker-test
 git pull
 echo pulled
-cd ~/docker-test/public
-npm run build
-echo built
 cd ~/docker-test
-echo ready to start server
+forever start -l test.log -a --uid test index.js
+echo server started
