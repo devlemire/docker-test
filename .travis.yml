@@ -19,8 +19,7 @@ script:
 - npm test
 after_success:
 - if [ "$TRAVIS_PULL_REQUEST" == false ]; then 
-    ssh deploy@198.199.116.198;
-    ls;
+    ssh deploy@198.199.116.198 > cd docker-test > ls;
   fi
 notifications:
   email: false
