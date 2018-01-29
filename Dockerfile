@@ -6,9 +6,9 @@ WORKDIR /var/app
 
 COPY package.json /var/app
 
-COPY yarn.lock /var/app
+COPY package-lock.json /var/app
  
-RUN yarn
+RUN npm install
 
 COPY . /var/app
 
