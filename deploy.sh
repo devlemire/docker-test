@@ -8,8 +8,9 @@ cd ~/docker-test/public
 yarn
 yarn build
 cd ~/docker-test
-docker build -t test .
+docker build -t test --squash .
 docker stop test_container
 docker rm test_container
 docker run -d -p 3000:3000 --name="test_container" -i test
-docker image prune -f
+docker container prune -f
+docker image prune -f 

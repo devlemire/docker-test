@@ -1,5 +1,5 @@
 #! /bin/sh
 
-npm install
+yarn
 
 node index.js
