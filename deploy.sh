@@ -5,8 +5,8 @@ cd ~/docker-test
 git pull
 echo pulled
 cd ~/docker-test/public
-npm install
-npm run build
+yarn
+yarn build
 cd ~/docker-test
 docker build -t test .
 docker stop test_container
