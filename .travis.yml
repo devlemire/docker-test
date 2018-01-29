@@ -3,7 +3,7 @@ node_js:
 - 8
 addons:
   ssh_known_hosts: 
-  - 198.199.116.198;
+  - 198.199.116.198
 before_install:
 - openssl aes-256-cbc -K $encrypted_9e5b9e749475_key -iv $encrypted_9e5b9e749475_iv
   -in id_rsa.enc -out id_rsa -d
