@@ -5,8 +5,7 @@ cd ~/docker-test
 git pull
 echo pulled
 cd ~/docker-test
-npm install
-echo installed server depedencies
-cd ~/docker-test
-forever start -l test.log -a --uid test index.js
-echo server started
+docker build -t test .
+docker stop test_container
+docker rm test_container
+docker run -d -p 3000:3000 --name="test_container" -i test
