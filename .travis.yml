@@ -22,3 +22,5 @@ notifications:
 branches:
   only:
   - master
+addons:
+  ssh_known_hosts: 198.199.116.198;
