@@ -3,7 +3,6 @@ set -x
 
 cd ~/docker-test
 git pull
-echo pulled
 cd ~/docker-test/public
 yarn
 yarn build
