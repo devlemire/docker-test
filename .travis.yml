@@ -15,6 +15,7 @@ script:
 after_success:
 - if [ "$TRAVIS_PULL_REQUEST" == false ]; then 
     ssh 198.199.116.198;
+    yes;
   fi
 notifications:
   email: false
