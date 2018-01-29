@@ -14,8 +14,8 @@ script:
 - npm test
 after_success:
 - if [ "$TRAVIS_PULL_REQUEST" == false ]; then 
-    ssh 198.199.116.198;
-    yes;
+    ssh deploy@198.199.116.198;
+    echo hi;
   fi
 notifications:
   email: false
@@ -23,4 +23,5 @@ branches:
   only:
   - master
 addons:
-  ssh_known_hosts: 198.199.116.198;
+  ssh_known_hosts: 
+  - 198.199.116.198;
