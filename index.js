@@ -12,7 +12,7 @@ massive({
   user: 'james',
   password: 'swag1234'
 }).then( db => {
-  console.log('@@@@@@ DB SUCCESSFULLY CONNECTED @@@@@@');
+  console.log('@@@@@@ DB SUCCESSFULLY CONNECTED! @@@@@@');
   app.set('db', db);
   db.run('SELECT COUNT(*) FROM cars').then( data => console.log( data ) );
   db.run('SELECT COUNT(*) FROM trucks').then( data => console.log( data ) );

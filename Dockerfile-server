@@ -10,4 +10,4 @@ RUN yarn
 
 EXPOSE 3001
  
-CMD ["./initialize-server.sh"]
+CMD ["yarn", "dev"]

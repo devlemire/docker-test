@@ -24,5 +24,8 @@
     "massive": "^4.6.3",
     "nodemon": "^1.14.11",
     "path": "^0.12.7"
+  },
+  "nodemonConfig": {
+    "ignore": [ "public/*" ]
   }
 }
