@@ -1,0 +1,13 @@
+version: "3"
+services:
+  webapp:
+    image: mhart/alpine-node
+    container_name: my-web-container
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+      - "35729:35729"
+    volumes:
+      - './:/var/app'
+
