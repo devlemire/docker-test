@@ -3,5 +3,8 @@ node_modules
 .travis.yml
 deploy.sh
 id_rsa.enc
-src/
+public/src
 public/public
+public/node_modules
+public/package.json
+public/yarn.lock
