@@ -4,7 +4,7 @@ MAINTAINER DevMountain
  
 WORKDIR /var/app
 
-COPY . /var/app
+COPY . .
  
 RUN yarn
 
