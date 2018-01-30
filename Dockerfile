@@ -4,7 +4,7 @@ LABEL maintainer="DevMountain"
 
 WORKDIR /var/app
 
-COPY . .
+COPY . /var/app
 
 RUN yarn
 
