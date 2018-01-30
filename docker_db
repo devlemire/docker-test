@@ -1,0 +1,2169 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.4
+-- Dumped by pg_dump version 9.6.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: cars; Type: TABLE; Schema: public; Owner: james
+--
+
+CREATE TABLE cars (
+    id integer NOT NULL,
+    color character varying(10),
+    make character varying(20),
+    model character varying(20)
+);
+
+
+ALTER TABLE cars OWNER TO james;
+
+--
+-- Name: cars_id_seq; Type: SEQUENCE; Schema: public; Owner: james
+--
+
+CREATE SEQUENCE cars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cars_id_seq OWNER TO james;
+
+--
+-- Name: cars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: james
+--
+
+ALTER SEQUENCE cars_id_seq OWNED BY cars.id;
+
+
+--
+-- Name: trucks; Type: TABLE; Schema: public; Owner: james
+--
+
+CREATE TABLE trucks (
+    id integer NOT NULL,
+    color character varying(10),
+    make character varying(20),
+    model character varying(20)
+);
+
+
+ALTER TABLE trucks OWNER TO james;
+
+--
+-- Name: trucks_id_seq; Type: SEQUENCE; Schema: public; Owner: james
+--
+
+CREATE SEQUENCE trucks_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE trucks_id_seq OWNER TO james;
+
+--
+-- Name: trucks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: james
+--
+
+ALTER SEQUENCE trucks_id_seq OWNED BY trucks.id;
+
+
+--
+-- Name: cars id; Type: DEFAULT; Schema: public; Owner: james
+--
+
+ALTER TABLE ONLY cars ALTER COLUMN id SET DEFAULT nextval('cars_id_seq'::regclass);
+
+
+--
+-- Name: trucks id; Type: DEFAULT; Schema: public; Owner: james
+--
+
+ALTER TABLE ONLY trucks ALTER COLUMN id SET DEFAULT nextval('trucks_id_seq'::regclass);
+
+
+--
+-- Data for Name: cars; Type: TABLE DATA; Schema: public; Owner: james
+--
+
+COPY cars (id, color, make, model) FROM stdin;
+1	Crimson	Volvo	V70
+2	Pink	Dodge	Caravan
+3	Green	Jeep	Liberty
+4	Yellow	BMW	Z3
+5	Blue	Mercedes-Benz	CL-Class
+6	Red	Ford	Laser
+7	Violet	Ford	Econoline E350
+8	Mauv	BMW	M5
+9	Violet	Mercedes-Benz	500SL
+10	Goldenrod	Mitsubishi	Cordia
+11	Pink	Chevrolet	Blazer
+12	Orange	Buick	Enclave
+13	Red	Chevrolet	2500
+14	Blue	Mercedes-Benz	E-Class
+15	Orange	Mercedes-Benz	R-Class
+16	Red	Oldsmobile	Aurora
+17	Maroon	Chevrolet	Express 2500
+18	Mauv	Chevrolet	Impala
+19	Teal	Nissan	Altima
+20	Indigo	Mazda	RX-8
+21	Blue	Hummer	H1
+22	Maroon	Volkswagen	Cabriolet
+23	Blue	Mazda	RX-8
+24	Puce	Lincoln	Continental Mark VII
+25	Purple	Dodge	Ram 1500
+26	Teal	Ferrari	458 Italia
+27	Goldenrod	Pontiac	6000
+28	Khaki	Toyota	Tacoma
+29	Purple	Dodge	Dakota
+30	Purple	Buick	LeSabre
+31	Orange	Nissan	Xterra
+32	Pink	Mercedes-Benz	C-Class
+33	Aquamarine	Chevrolet	Silverado 1500
+34	Red	Porsche	911
+35	Goldenrod	Mitsubishi	Mirage
+36	Puce	Lincoln	Continental Mark VII
+37	Fuscia	Volkswagen	Rabbit
+38	Turquoise	Chrysler	Pacifica
+39	Indigo	Infiniti	QX56
+40	Fuscia	Dodge	Caliber
+41	Yellow	Pontiac	Fiero
+42	Puce	Lexus	GX
+43	Khaki	Volkswagen	GTI
+44	Violet	GMC	Yukon
+45	Mauv	Volkswagen	Eos
+46	Aquamarine	Cadillac	Escalade
+47	Blue	Buick	Riviera
+48	Violet	Volvo	V70
+49	Pink	Saab	9-3
+50	Orange	Toyota	Celica
+51	Yellow	Audi	riolet
+52	Pink	Dodge	Caliber
+53	Pink	Audi	S8
+54	Pink	Buick	Park Avenue
+55	Red	Geo	Storm
+56	Aquamarine	Chevrolet	Silverado 1500
+57	Blue	Acura	NSX
+58	Orange	Saturn	L-Series
+59	Red	Mazda	Mazdaspeed 3
+60	Mauv	Mitsubishi	Galant
+61	Fuscia	Dodge	Intrepid
+62	Green	Lincoln	Continental
+63	Fuscia	Subaru	Outback
+64	Blue	Hyundai	Accent
+65	Aquamarine	Ford	Fairlane
+66	Indigo	Chrysler	PT Cruiser
+67	Yellow	Toyota	Corolla
+68	Turquoise	Ford	Freestar
+69	Mauv	GMC	Yukon XL 2500
+70	Red	Lexus	RX
+71	Fuscia	Land Rover	LR2
+72	Fuscia	Pontiac	GTO
+73	Orange	Land Rover	Range Rover Sport
+74	Aquamarine	Volvo	C70
+75	Turquoise	Chevrolet	Avalanche 2500
+76	Indigo	Mitsubishi	Galant
+77	Orange	Hyundai	Elantra
+78	Pink	Pontiac	Grand Am
+79	Khaki	Suzuki	SJ
+80	Purple	Chrysler	Prowler
+81	Goldenrod	Subaru	Outback
+82	Aquamarine	Buick	Reatta
+83	Violet	Kia	Spectra
+84	Turquoise	Mitsubishi	Mighty Max
+85	Indigo	Dodge	Ram 2500
+86	Red	Toyota	MR2
+87	Violet	Pontiac	GTO
+88	Orange	Ford	Expedition EL
+89	Indigo	Chevrolet	Tahoe
+90	Green	Pontiac	Sunfire
+91	Green	Ford	Mustang
+92	Violet	Infiniti	QX
+93	Crimson	Audi	S8
+94	Teal	Mitsubishi	Montero Sport
+95	Purple	Isuzu	Ascender
+96	Teal	Kia	Rio
+97	Green	Dodge	Durango
+98	Red	Suzuki	Aerio
+99	Purple	Lincoln	Mark VIII
+100	Fuscia	Toyota	Celica
+101	Fuscia	Buick	Skylark
+102	Goldenrod	Isuzu	Rodeo Sport
+103	Crimson	Dodge	Ram 3500
+104	Aquamarine	Mazda	B-Series
+105	Yellow	Chrysler	Sebring
+106	Green	GMC	1500
+107	Maroon	Audi	A6
+108	Yellow	Ford	Fairlane
+109	Purple	Ford	Explorer
+110	Pink	Cadillac	Seville
+111	Crimson	Saab	9-5
+112	Orange	Subaru	Impreza
+113	Crimson	Ford	F350
+114	Turquoise	Volkswagen	Golf
+115	Orange	Suzuki	Swift
+116	Violet	Pontiac	GTO
+117	Pink	Honda	Odyssey
+118	Red	Toyota	Tacoma Xtra
+119	Green	Mercury	Cougar
+120	Maroon	Nissan	Altima
+121	Blue	Chevrolet	Express 1500
+122	Blue	Nissan	Altima
+123	Mauv	Hyundai	Elantra
+124	Red	Chevrolet	Express 1500
+125	Fuscia	Audi	S6
+126	Aquamarine	Acura	RDX
+127	Puce	Chevrolet	Cavalier
+128	Aquamarine	Kia	Carens
+129	Aquamarine	Plymouth	Colt
+130	Maroon	Mitsubishi	Galant
+131	Indigo	Land Rover	Discovery
+132	Fuscia	Mitsubishi	Lancer
+133	Green	BMW	6 Series
+134	Fuscia	Dodge	Ram 3500
+135	Teal	Oldsmobile	Bravada
+136	Mauv	Nissan	Altima
+137	Maroon	Chevrolet	1500
+138	Indigo	Toyota	Highlander
+139	Mauv	Pontiac	Grand Prix
+140	Purple	Dodge	D350 Club
+141	Puce	Dodge	Journey
+142	Fuscia	Toyota	Avalon
+143	Teal	Lexus	ES
+144	Purple	BMW	M3
+145	Mauv	Toyota	Avalon
+146	Puce	Lexus	GX
+147	Maroon	Toyota	Camry
+148	Turquoise	Cadillac	CTS-V
+149	Crimson	Suzuki	Grand Vitara
+150	Puce	Scion	tC
+151	Turquoise	GMC	Jimmy
+152	Violet	Mercury	Mountaineer
+153	Purple	Mazda	626
+154	Yellow	Audi	A8
+155	Red	Dodge	Viper
+156	Violet	Ford	Mustang
+157	Puce	Mazda	626
+158	Aquamarine	Pontiac	Grand Prix
+159	Mauv	Ford	E-Series
+160	Violet	Hyundai	Veracruz
+161	Aquamarine	Dodge	Caravan
+162	Crimson	GMC	Canyon
+163	Green	Subaru	Outback
+164	Red	Toyota	4Runner
+165	Green	Buick	Reatta
+166	Pink	Ford	Mustang
+167	Turquoise	Subaru	Tribeca
+168	Crimson	Ford	Contour
+169	Indigo	Suzuki	Swift
+170	Yellow	Buick	Regal
+171	Green	Chevrolet	Aveo
+172	Orange	Buick	Century
+173	Maroon	Chevrolet	Express 2500
+174	Green	Ford	E-Series
+175	Puce	Lexus	GS
+176	Green	Porsche	Boxster
+177	Fuscia	Volvo	V40
+178	Pink	Audi	A3
+179	Puce	Honda	Civic
+180	Fuscia	Ford	Expedition
+181	Yellow	Suzuki	Daewoo Lacetti
+182	Indigo	Porsche	Boxster
+183	Indigo	Dodge	Avenger
+184	Maroon	Pontiac	Grand Am
+185	Goldenrod	BMW	3 Series
+186	Purple	Pontiac	Sunfire
+187	Goldenrod	Chevrolet	Silverado 3500
+188	Crimson	Nissan	Maxima
+189	Purple	Saturn	VUE
+190	Teal	Ferrari	F430
+191	Puce	Suzuki	XL-7
+192	Fuscia	Ford	Contour
+193	Maroon	Honda	Pilot
+194	Red	Mitsubishi	Starion
+195	Pink	GMC	Envoy
+196	Pink	Chevrolet	Corvair 500
+197	Crimson	Chevrolet	Malibu
+198	Crimson	Mercury	Cougar
+199	Indigo	Hyundai	Tiburon
+200	Maroon	Chevrolet	Beretta
+201	Yellow	Lexus	ES
+202	Pink	Toyota	Highlander
+203	Pink	Mercury	Monterey
+204	Turquoise	Mazda	Miata MX-5
+205	Maroon	Toyota	Tacoma
+206	Puce	Mercury	Topaz
+207	Mauv	Acura	Vigor
+208	Yellow	Acura	TSX
+209	Turquoise	Pontiac	Firefly
+210	Indigo	Cadillac	Escalade ESV
+211	Yellow	Mazda	Miata MX-5
+212	Aquamarine	Maserati	Quattroporte
+213	Goldenrod	Mercury	Grand Marquis
+214	Mauv	Volvo	C70
+215	Red	Buick	Century
+216	Crimson	Chevrolet	Silverado 2500
+217	Mauv	Mazda	MX-5
+218	Turquoise	Oldsmobile	98
+219	Fuscia	GMC	2500 Club Coupe
+220	Mauv	Lamborghini	Diablo
+221	Mauv	BMW	3 Series
+222	Goldenrod	Mazda	MX-6
+223	Pink	Jaguar	XK
+224	Yellow	GMC	Yukon XL 2500
+225	Puce	Mitsubishi	Tredia
+226	Goldenrod	Volkswagen	Jetta
+227	Red	Nissan	Pathfinder
+228	Yellow	Acura	NSX
+229	Crimson	Honda	Pilot
+230	Yellow	Ford	E-Series
+231	Green	Ford	Crown Victoria
+232	Orange	Acura	NSX
+233	Indigo	Jeep	Grand Cherokee
+234	Green	Chevrolet	Avalanche 1500
+235	Fuscia	Dodge	Grand Caravan
+236	Teal	Buick	Regal
+237	Violet	Porsche	968
+238	Khaki	Ford	F350
+239	Red	Toyota	Solara
+240	Turquoise	Volkswagen	Touareg
+241	Aquamarine	Subaru	Forester
+242	Puce	Lexus	RX Hybrid
+243	Green	Spyker	C8 Spyder
+244	Khaki	Volkswagen	Tiguan
+245	Goldenrod	Audi	TT
+246	Puce	Volvo	C30
+247	Maroon	Mazda	MPV
+248	Orange	Chevrolet	Tahoe
+249	Green	Mercedes-Benz	S-Class
+250	Indigo	Chevrolet	Silverado
+251	Pink	Toyota	Echo
+252	Violet	Lexus	IS
+253	Maroon	GMC	Jimmy
+254	Fuscia	Plymouth	Roadrunner
+255	Puce	Plymouth	Grand Voyager
+256	Indigo	Cadillac	Eldorado
+257	Teal	Chevrolet	Avalanche 2500
+258	Fuscia	Isuzu	Oasis
+259	Goldenrod	Pontiac	Grand Prix
+260	Indigo	Land Rover	LR3
+261	Red	Tesla	Roadster
+262	Red	Dodge	Ram Wagon B250
+263	Yellow	Chrysler	300M
+264	Mauv	Pontiac	GTO
+265	Maroon	Honda	Insight
+266	Pink	Chevrolet	Camaro
+267	Teal	Mercury	Capri
+268	Green	Toyota	Sequoia
+269	Turquoise	Land Rover	LR2
+270	Pink	Mazda	MX-3
+271	Indigo	GMC	Savana 2500
+272	Pink	Isuzu	i-280
+273	Khaki	Jaguar	XJ
+274	Orange	Mercedes-Benz	CL-Class
+275	Red	Mitsubishi	Lancer Evolution
+276	Violet	Saab	9000
+277	Green	Dodge	Ram
+278	Crimson	Chevrolet	Metro
+279	Teal	GMC	Sierra 3500
+280	Fuscia	Bentley	Arnage
+281	Khaki	Chevrolet	S10
+282	Fuscia	Infiniti	QX
+283	Goldenrod	Volvo	S80
+284	Blue	Cadillac	Eldorado
+285	Purple	Land Rover	Range Rover
+286	Fuscia	Ford	F-Series
+287	Orange	Dodge	Ram 2500
+288	Purple	Mazda	RX-7
+289	Blue	Subaru	Baja
+290	Purple	Isuzu	Rodeo
+291	Teal	Chevrolet	Express 1500
+292	Khaki	Subaru	Legacy
+293	Khaki	Volkswagen	GTI
+294	Khaki	Volkswagen	Touareg
+295	Red	GMC	Sierra
+296	Teal	Cadillac	Fleetwood
+297	Red	Saturn	VUE
+298	Violet	GMC	Sierra 1500
+299	Aquamarine	Lexus	GX
+300	Khaki	Chevrolet	Caprice
+301	Pink	BMW	M5
+302	Khaki	Audi	S5
+303	Aquamarine	Chrysler	300C
+304	Green	Cadillac	Catera
+305	Aquamarine	Mazda	B-Series Plus
+306	Purple	GMC	Sonoma Club
+307	Puce	Chevrolet	Avalanche 2500
+308	Fuscia	Pontiac	Grand Am
+309	Puce	Volkswagen	Passat
+310	Red	Ford	LTD Crown Victoria
+311	Mauv	BMW	7 Series
+312	Teal	Cadillac	SRX
+313	Red	Ferrari	599 GTB Fiorano
+314	Aquamarine	Dodge	Intrepid
+315	Teal	Porsche	928
+316	Yellow	Mitsubishi	Starion
+317	Puce	Porsche	Boxster
+318	Violet	Cadillac	CTS
+319	Goldenrod	Chevrolet	Prizm
+320	Crimson	Volkswagen	Golf
+321	Fuscia	Pontiac	Grand Am
+322	Green	Toyota	Yaris
+323	Aquamarine	Kia	Forte
+324	Yellow	Ford	Fiesta
+325	Blue	Saab	9-2X
+326	Aquamarine	Mercedes-Benz	GL-Class
+327	Mauv	Toyota	Tacoma
+328	Red	Kia	Sportage
+329	Goldenrod	Volkswagen	Golf
+330	Goldenrod	Ford	Mustang
+331	Pink	Audi	A8
+332	Violet	Acura	Integra
+333	Mauv	Ford	Mustang
+334	Mauv	Ford	Mustang
+335	Goldenrod	Buick	Park Avenue
+336	Crimson	Ford	Taurus
+337	Puce	Volkswagen	GTI
+338	Orange	Honda	Ridgeline
+339	Yellow	Subaru	Impreza
+340	Goldenrod	Mitsubishi	Tredia
+341	Pink	Lexus	GS
+342	Blue	Chevrolet	Camaro
+343	Turquoise	Honda	Prelude
+344	Purple	BMW	Z4
+345	Blue	Kia	Rio
+346	Crimson	Mazda	Mazda3
+347	Red	Dodge	Ram Van 3500
+348	Orange	Ford	Expedition EL
+349	Fuscia	MINI	Cooper
+350	Indigo	Land Rover	Freelander
+351	Teal	BMW	5 Series
+352	Yellow	Pontiac	Grand Prix
+353	Violet	Hyundai	Sonata
+354	Fuscia	Mercury	Grand Marquis
+355	Blue	Nissan	300ZX
+356	Turquoise	GMC	Savana 2500
+357	Purple	Oldsmobile	Achieva
+358	Goldenrod	Dodge	Ram 2500
+359	Puce	Ford	E-Series
+360	Orange	Ford	Econoline E150
+361	Fuscia	Cadillac	DeVille
+362	Mauv	Cadillac	XLR-V
+363	Purple	GMC	2500 Club Coupe
+364	Orange	BMW	7 Series
+365	Khaki	BMW	5 Series
+366	Turquoise	Ford	Taurus
+367	Maroon	Scion	xD
+368	Khaki	Toyota	Camry
+369	Orange	Toyota	RAV4
+370	Red	Chevrolet	Suburban 2500
+371	Blue	Hyundai	Elantra
+372	Pink	Hyundai	Sonata
+373	Teal	Land Rover	Range Rover
+374	Puce	Volvo	C70
+375	Green	Chevrolet	Express 1500
+376	Violet	Ferrari	F430 Spider
+377	Teal	BMW	3 Series
+378	Blue	Toyota	4Runner
+379	Violet	Land Rover	Freelander
+380	Maroon	Suzuki	Vitara
+381	Orange	Pontiac	Bonneville
+382	Blue	Dodge	D250
+383	Aquamarine	Plymouth	Voyager
+384	Blue	Lexus	CT
+385	Fuscia	Honda	Element
+386	Mauv	Acura	TL
+387	Pink	Saab	9-5
+388	Maroon	Mazda	Mazda6 Sport
+389	Yellow	Ford	Flex
+390	Goldenrod	Land Rover	Discovery Series II
+391	Orange	Volvo	S80
+392	Aquamarine	Land Rover	Range Rover
+393	Mauv	Toyota	Sienna
+394	Blue	Mercury	Grand Marquis
+395	Red	Jeep	Grand Cherokee
+396	Goldenrod	Nissan	Titan
+397	Turquoise	Hyundai	Sonata
+398	Green	Jeep	Cherokee
+399	Blue	Mercedes-Benz	E-Class
+400	Maroon	Porsche	924
+401	Blue	Cadillac	Escalade
+402	Crimson	Buick	Century
+403	Pink	Nissan	Pathfinder
+404	Yellow	Subaru	Outback
+405	Fuscia	Ford	E150
+406	Maroon	Plymouth	Laser
+407	Puce	Cadillac	CTS-V
+408	Crimson	Bentley	Continental GT
+409	Crimson	Mercedes-Benz	S-Class
+410	Khaki	Nissan	Quest
+411	Fuscia	Mitsubishi	Galant
+412	Maroon	Toyota	Xtra
+413	Puce	Infiniti	G
+414	Blue	Mazda	626
+415	Indigo	Audi	4000CS Quattro
+416	Purple	Bentley	Mulsanne
+417	Puce	Ford	Econoline E350
+418	Blue	Toyota	Celica
+419	Blue	Ford	F-Series
+420	Fuscia	Chevrolet	Silverado 2500
+421	Goldenrod	Buick	Century
+422	Blue	BMW	1 Series
+423	Teal	Audi	V8
+424	Crimson	Ford	F150
+425	Pink	GMC	Canyon
+426	Pink	Buick	Century
+427	Puce	Lexus	RX
+428	Khaki	Lincoln	Town Car
+429	Crimson	Mercury	Cougar
+430	Aquamarine	Suzuki	SX4
+431	Aquamarine	Toyota	Tacoma
+432	Crimson	Land Rover	Defender
+433	Violet	Ford	Windstar
+434	Aquamarine	Mercedes-Benz	300SE
+435	Blue	GMC	Vandura 3500
+436	Fuscia	Honda	S2000
+437	Goldenrod	Pontiac	Grand Prix
+438	Purple	Pontiac	GTO
+439	Aquamarine	Subaru	Forester
+440	Yellow	Ford	F150
+441	Turquoise	Nissan	Armada
+442	Puce	Mazda	CX-5
+443	Aquamarine	Mercedes-Benz	SL-Class
+444	Violet	Jaguar	XJ Series
+445	Aquamarine	Plymouth	Grand Voyager
+446	Puce	Jeep	Cherokee
+447	Aquamarine	Toyota	Celica
+448	Teal	Jeep	Grand Cherokee
+449	Green	Infiniti	EX
+450	Maroon	Audi	S8
+451	Fuscia	Mitsubishi	Montero
+452	Teal	Acura	CL
+453	Green	Toyota	Tacoma Xtra
+454	Purple	Chevrolet	Corvair
+455	Maroon	GMC	Savana 1500
+456	Khaki	Kia	Spectra
+457	Crimson	Isuzu	Rodeo
+458	Yellow	Ford	Econoline E250
+459	Yellow	Dodge	Ram Van B150
+460	Orange	Toyota	4Runner
+461	Red	Isuzu	Ascender
+462	Indigo	Dodge	Dakota Club
+463	Khaki	Ford	Windstar
+464	Maroon	Audi	4000
+465	Green	Chevrolet	G-Series G10
+466	Khaki	Chevrolet	Suburban 2500
+467	Red	Chevrolet	Beretta
+468	Aquamarine	Dodge	Charger
+469	Blue	Volkswagen	GTI
+470	Teal	Pontiac	LeMans
+471	Red	Pontiac	Grand Prix
+472	Pink	Kia	Sephia
+473	Aquamarine	Ford	Explorer Sport Trac
+474	Purple	GMC	1500 Club Coupe
+475	Yellow	Maserati	Spyder
+476	Crimson	Oldsmobile	Cutlass Cruiser
+477	Violet	GMC	Yukon XL 1500
+478	Indigo	Chevrolet	S10
+479	Turquoise	Mercedes-Benz	C-Class
+480	Crimson	Chevrolet	Impala
+481	Fuscia	BMW	3 Series
+482	Green	BMW	Z4
+483	Crimson	Bentley	Brooklands
+484	Maroon	Chevrolet	Cobalt
+485	Violet	Hummer	H1
+486	Teal	Infiniti	Q
+487	Maroon	Ford	Escape
+488	Crimson	Honda	Accord
+489	Orange	Lexus	ES
+490	Mauv	Kia	Sorento
+491	Turquoise	Ford	Explorer
+492	Maroon	Ford	Escape
+493	Purple	Chevrolet	Tracker
+494	Aquamarine	Cadillac	DTS
+495	Purple	Chevrolet	Avalanche 2500
+496	Goldenrod	Porsche	Boxster
+497	Teal	Mitsubishi	Mighty Max Macro
+498	Maroon	Suzuki	Equator
+499	Aquamarine	Pontiac	Bonneville
+500	Orange	Lexus	IS-F
+501	Fuscia	GMC	Savana 2500
+502	Green	Subaru	Impreza
+503	Red	Mercedes-Benz	W201
+504	Purple	Infiniti	I
+505	Indigo	Volvo	S80
+506	Fuscia	Mercury	Milan
+507	Khaki	GMC	Yukon XL 1500
+508	Pink	Nissan	Frontier
+509	Teal	Nissan	Sentra
+510	Aquamarine	Suzuki	Vitara
+511	Turquoise	Toyota	Tundra
+512	Teal	Honda	S2000
+513	Mauv	BMW	Z3
+514	Yellow	Mitsubishi	Galant
+515	Maroon	Lexus	IS
+516	Teal	Scion	xB
+517	Green	Kia	Rio
+518	Aquamarine	GMC	Yukon
+519	Yellow	BMW	X5
+520	Red	Toyota	Avalon
+521	Maroon	Infiniti	Q
+522	Puce	Chevrolet	Camaro
+523	Pink	GMC	Vandura 1500
+524	Mauv	Subaru	Baja
+525	Turquoise	Audi	A4
+526	Puce	Lotus	Elan
+527	Maroon	Mercury	Topaz
+528	Aquamarine	Mitsubishi	Pajero
+529	Aquamarine	BMW	3 Series
+530	Aquamarine	Land Rover	Range Rover
+531	Puce	Chevrolet	Astro
+532	Mauv	Ford	Mustang
+533	Goldenrod	Lincoln	Town Car
+534	Blue	Ford	Ranger
+535	Crimson	Chevrolet	Tracker
+536	Purple	Honda	S2000
+537	Violet	Ford	E150
+538	Indigo	Mercedes-Benz	500E
+539	Aquamarine	Ford	Contour
+540	Turquoise	Maserati	Spyder
+541	Puce	Rolls-Royce	Phantom
+542	Blue	Mercedes-Benz	S-Class
+543	Puce	Dodge	Ram 1500
+544	Indigo	Audi	A7
+545	Maroon	Mitsubishi	Cordia
+546	Yellow	Dodge	Dakota
+547	Yellow	Ford	Escape
+548	Orange	GMC	Sonoma
+549	Purple	Mercury	Cougar
+550	Puce	Lincoln	LS
+551	Puce	Audi	A4
+552	Orange	Oldsmobile	Silhouette
+553	Mauv	Studebaker	Avanti
+554	Crimson	Chevrolet	Uplander
+555	Pink	GMC	Savana 3500
+556	Aquamarine	Mazda	RX-7
+557	Pink	Volkswagen	Touareg
+558	Green	Mercury	Tracer
+559	Violet	Chevrolet	Monte Carlo
+560	Pink	Ford	Thunderbird
+561	Green	Mazda	Mazda3
+562	Green	Audi	TT
+563	Aquamarine	Land Rover	Range Rover
+564	Goldenrod	Chevrolet	Express 3500
+565	Goldenrod	Toyota	T100 Xtra
+566	Violet	Oldsmobile	Cutlass Supreme
+567	Green	Ford	Taurus
+568	Yellow	Dodge	D250
+569	Khaki	Chevrolet	Equinox
+570	Orange	Porsche	Carrera GT
+571	Purple	Maserati	Spyder
+572	Mauv	Chevrolet	Malibu
+573	Blue	Mercedes-Benz	CLK-Class
+574	Orange	Buick	Regal
+575	Teal	Mercedes-Benz	E-Class
+576	Violet	Dodge	Neon
+577	Goldenrod	Mazda	RX-7
+578	Puce	Land Rover	Defender 90
+579	Pink	Porsche	911
+580	Mauv	Saturn	L-Series
+581	Blue	Mitsubishi	Raider
+582	Indigo	Kia	Amanti
+583	Pink	Oldsmobile	88
+584	Red	Cadillac	Seville
+585	Pink	Daewoo	Nubira
+586	Turquoise	Ford	Mustang
+587	Indigo	Chevrolet	Silverado 1500
+588	Green	BMW	3 Series
+589	Blue	Chevrolet	Cobalt
+590	Green	Buick	LaCrosse
+591	Khaki	GMC	Sierra 1500
+592	Maroon	Mitsubishi	Pajero
+593	Orange	Ford	Fusion
+594	Maroon	Lamborghini	Countach
+595	Yellow	GMC	Rally Wagon 3500
+596	Orange	Volkswagen	Golf
+597	Mauv	Oldsmobile	Silhouette
+598	Crimson	Honda	Odyssey
+599	Teal	Dodge	Spirit
+600	Puce	Maybach	62
+601	Yellow	Audi	A6
+602	Orange	Chevrolet	Express 1500
+603	Puce	Subaru	Impreza
+604	Yellow	Porsche	Boxster
+605	Orange	Dodge	Ram 2500
+606	Fuscia	Ford	Thunderbird
+607	Goldenrod	Suzuki	Forenza
+608	Mauv	Suzuki	Swift
+609	Red	Lexus	IS-F
+610	Crimson	Land Rover	Discovery
+611	Mauv	Toyota	RAV4
+612	Puce	Mercedes-Benz	C-Class
+613	Red	Mercury	Grand Marquis
+614	Orange	Mercury	Lynx
+615	Indigo	Volkswagen	Scirocco
+616	Green	Toyota	Echo
+617	Purple	Ford	Edge
+618	Goldenrod	Lincoln	Town Car
+619	Mauv	Mercury	Sable
+620	Maroon	Subaru	Forester
+621	Violet	Mercedes-Benz	600SEL
+622	Crimson	Plymouth	Grand Voyager
+623	Green	Land Rover	LR3
+624	Teal	Saab	9000
+625	Crimson	Ferrari	612 Scaglietti
+626	Turquoise	Dodge	Ram Wagon B150
+627	Violet	Mitsubishi	RVR
+628	Orange	Mitsubishi	Mighty Max
+629	Maroon	Chevrolet	Express 1500
+630	Green	Suzuki	Aerio
+631	Fuscia	Hyundai	Sonata
+632	Yellow	Chevrolet	Colorado
+633	Maroon	Mazda	626
+634	Pink	BMW	745
+635	Purple	Jeep	Patriot
+636	Turquoise	Hillman	Minx Magnificent
+637	Goldenrod	Ferrari	458 Italia
+638	Yellow	Saturn	Ion
+639	Red	Honda	Civic GX
+640	Indigo	Toyota	Land Cruiser
+641	Blue	GMC	Safari
+642	Crimson	Cadillac	STS
+643	Goldenrod	Lexus	ES
+644	Aquamarine	Chevrolet	Tahoe
+645	Khaki	Lexus	LS Hybrid
+646	Turquoise	Bentley	Continental GT
+647	Khaki	Mercedes-Benz	E-Class
+648	Mauv	Jeep	Grand Cherokee
+649	Pink	Toyota	Supra
+650	Yellow	Toyota	Matrix
+651	Puce	Mercedes-Benz	E-Class
+652	Khaki	Mercedes-Benz	300SL
+653	Fuscia	Dodge	Ram 1500
+654	Blue	Jeep	Wrangler
+655	Goldenrod	Lexus	ES
+656	Orange	Toyota	Echo
+657	Red	Hyundai	Sonata
+658	Green	Mercedes-Benz	M-Class
+659	Indigo	Subaru	Outback
+660	Crimson	Ford	Thunderbird
+661	Green	Buick	Rendezvous
+662	Indigo	Jaguar	XJ Series
+663	Orange	Cadillac	Seville
+664	Orange	Lexus	RX
+665	Goldenrod	Mazda	B-Series
+666	Yellow	Acura	RDX
+667	Puce	Pontiac	Bonneville
+668	Blue	Suzuki	Forenza
+669	Fuscia	Audi	R8
+670	Blue	Lincoln	Town Car
+671	Khaki	Infiniti	QX56
+672	Red	Dodge	Aries
+673	Blue	Isuzu	Rodeo Sport
+674	Green	Ford	Lightning
+675	Green	Mercedes-Benz	E-Class
+676	Teal	Ford	Crown Victoria
+677	Violet	Mitsubishi	Eclipse
+678	Teal	Ford	Bronco II
+679	Orange	Maybach	57
+680	Violet	Chevrolet	Tahoe
+681	Indigo	Subaru	Baja
+682	Khaki	Kia	Rio
+683	Mauv	Suzuki	Grand Vitara
+684	Violet	Mazda	MX-5
+685	Orange	Mitsubishi	Galant
+686	Maroon	Plymouth	Colt Vista
+687	Red	Chevrolet	Malibu
+688	Pink	Audi	A6
+689	Mauv	Honda	CR-V
+690	Yellow	Infiniti	I
+691	Purple	Lotus	Exige
+692	Teal	Mercury	Cougar
+693	Crimson	Plymouth	Grand Voyager
+694	Yellow	Lexus	LS Hybrid
+695	Teal	Honda	Accord
+696	Indigo	Chevrolet	Tracker
+697	Green	Audi	90
+698	Aquamarine	Mazda	MPV
+699	Turquoise	Infiniti	G
+700	Khaki	Cadillac	DeVille
+701	Turquoise	GMC	Savana 3500
+702	Aquamarine	Porsche	Boxster
+703	Maroon	Ford	Windstar
+704	Blue	Kia	Optima
+705	Purple	Ford	Explorer Sport Trac
+706	Teal	Chevrolet	Express 3500
+707	Green	Chevrolet	SSR
+708	Goldenrod	Pontiac	Bonneville
+709	Yellow	Mitsubishi	Truck
+710	Green	BMW	530
+711	Green	Mercury	Capri
+712	Pink	Dodge	Viper RT/10
+713	Mauv	Buick	Riviera
+714	Fuscia	Alfa Romeo	164
+715	Green	Honda	Accord
+716	Turquoise	Dodge	Ram Wagon B250
+717	Fuscia	Chrysler	PT Cruiser
+718	Blue	Volkswagen	rio
+719	Fuscia	Lincoln	Mark LT
+720	Pink	Toyota	Camry
+721	Turquoise	Kia	Sorento
+722	Yellow	Nissan	Pathfinder
+723	Teal	Lexus	IS-F
+724	Red	Hummer	H3
+725	Fuscia	Audi	A6
+726	Yellow	Volkswagen	Eurovan
+727	Yellow	Kia	Mohave/Borrego
+728	Puce	Audi	Cabriolet
+729	Goldenrod	Chrysler	Sebring
+730	Mauv	Dodge	Viper
+731	Pink	Lotus	Exige
+732	Goldenrod	Nissan	Maxima
+733	Violet	Suzuki	Swift
+734	Puce	Hyundai	Elantra
+735	Khaki	Toyota	Camry Solara
+736	Indigo	Chevrolet	Corvette
+737	Maroon	Chevrolet	Express 3500
+738	Yellow	Mazda	323
+739	Red	Chrysler	Concorde
+740	Puce	BMW	7 Series
+741	Maroon	Chevrolet	Avalanche
+742	Aquamarine	Suzuki	Verona
+743	Purple	Honda	Civic GX
+744	Purple	Acura	MDX
+745	Khaki	Mitsubishi	Lancer Evolution
+746	Blue	Hummer	H2 SUT
+747	Blue	Chevrolet	Tahoe
+748	Blue	Dodge	Grand Caravan
+749	Khaki	Oldsmobile	Cutlass
+750	Goldenrod	Chrysler	LeBaron
+751	Purple	Cadillac	Fleetwood
+752	Turquoise	Ford	Mustang
+753	Mauv	Oldsmobile	Intrigue
+754	Aquamarine	Infiniti	FX
+755	Goldenrod	BMW	3 Series
+756	Turquoise	Pontiac	Solstice
+757	Maroon	Toyota	Sienna
+758	Pink	Audi	RS 4
+759	Goldenrod	Toyota	Corolla
+760	Maroon	BMW	Z4
+761	Purple	Scion	tC
+762	Crimson	Ford	Mustang
+763	Yellow	Pontiac	Sunbird
+764	Puce	Ram	2500
+765	Crimson	Toyota	Echo
+766	Crimson	Buick	Electra
+767	Goldenrod	BMW	7 Series
+768	Turquoise	Infiniti	Q
+769	Blue	Audi	R8
+770	Purple	Chevrolet	Cavalier
+771	Fuscia	Land Rover	Range Rover Sport
+772	Aquamarine	Dodge	Durango
+773	Goldenrod	Dodge	Viper
+774	Teal	Nissan	Altima
+775	Green	Ford	Five Hundred
+776	Green	GMC	2500 Club Coupe
+777	Purple	Volkswagen	GTI
+778	Purple	Subaru	Justy
+779	Green	Ford	Econoline E250
+780	Fuscia	Plymouth	Grand Voyager
+781	Mauv	Lincoln	MKX
+782	Pink	Chevrolet	Camaro
+783	Blue	Dodge	Ram 3500
+784	Khaki	Cadillac	SRX
+785	Crimson	Toyota	Truck Xtracab SR5
+786	Maroon	Chevrolet	Suburban
+787	Purple	GMC	Sierra 2500
+788	Blue	Jeep	Cherokee
+789	Indigo	Subaru	Forester
+790	Blue	Chrysler	Concorde
+791	Pink	Mercury	Grand Marquis
+792	Violet	Nissan	Altima
+793	Turquoise	Ford	Probe
+794	Purple	Chevrolet	TrailBlazer
+795	Yellow	Honda	CR-V
+796	Khaki	Nissan	Altima
+797	Mauv	Honda	Insight
+798	Violet	GMC	Yukon
+799	Mauv	Volkswagen	GTI
+800	Red	Nissan	Titan
+801	Blue	Mazda	626
+802	Yellow	BMW	Z4 M
+803	Crimson	Pontiac	Trans Sport
+804	Fuscia	Cadillac	CTS
+805	Indigo	Jaguar	XK
+806	Indigo	Suzuki	Forenza
+807	Teal	Lexus	LS
+808	Red	Hyundai	Azera
+809	Turquoise	Buick	Regal
+810	Mauv	Isuzu	Space
+811	Maroon	Dodge	Ram 2500
+812	Red	Ford	Focus
+813	Indigo	Mazda	Mazda6
+814	Green	Isuzu	Rodeo
+815	Red	Volvo	850
+816	Teal	Lincoln	MKZ
+817	Red	Audi	S4
+818	Yellow	Dodge	Ram Van 2500
+819	Aquamarine	Volkswagen	Beetle
+820	Teal	Dodge	Intrepid
+821	Mauv	Plymouth	Breeze
+822	Fuscia	Chevrolet	Sportvan G10
+823	Teal	Dodge	Ram Van B150
+824	Violet	GMC	Suburban 1500
+825	Aquamarine	GMC	Sonoma
+826	Maroon	Ford	E-Series
+827	Crimson	BMW	7 Series
+828	Indigo	Ford	F-Series Super Duty
+829	Puce	Toyota	Camry
+830	Teal	Chevrolet	Corvette
+831	Mauv	GMC	1500 Club Coupe
+832	Pink	Jeep	Grand Cherokee
+833	Violet	Mitsubishi	GTO
+834	Green	Nissan	Quest
+835	Orange	Mitsubishi	Eclipse
+836	Mauv	Porsche	911
+837	Green	Dodge	Ram Van 1500
+838	Crimson	Toyota	Echo
+839	Teal	Mercedes-Benz	W123
+840	Aquamarine	BMW	8 Series
+841	Turquoise	Mazda	MPV
+842	Teal	Saab	900
+843	Teal	Honda	Prelude
+844	Orange	Mazda	Miata MX-5
+845	Teal	Ford	Expedition EL
+846	Goldenrod	Dodge	Ram 1500 Club
+847	Turquoise	Land Rover	Freelander
+848	Goldenrod	Mercury	Cougar
+849	Yellow	Toyota	Matrix
+850	Khaki	Daewoo	Lanos
+851	Crimson	Hyundai	Elantra
+852	Orange	Jaguar	XK Series
+853	Indigo	Honda	Prelude
+854	Green	Buick	Somerset
+855	Fuscia	Mitsubishi	Galant
+856	Mauv	Cadillac	Seville
+857	Aquamarine	Volvo	C70
+858	Purple	Ford	E-Series
+859	Teal	Toyota	Avalon
+860	Fuscia	GMC	1500
+861	Aquamarine	Mercedes-Benz	SL-Class
+862	Orange	Honda	Civic
+863	Yellow	Aston Martin	Vantage
+864	Puce	Chrysler	300
+865	Orange	Renault	Alliance
+866	Blue	Cadillac	DeVille
+867	Turquoise	Chevrolet	Camaro
+868	Teal	Ford	Tempo
+869	Goldenrod	Mercedes-Benz	C-Class
+870	Orange	Acura	Vigor
+871	Crimson	Mazda	Mazda6
+872	Red	Chevrolet	Camaro
+873	Crimson	Volkswagen	GTI
+874	Turquoise	Mercedes-Benz	CLK-Class
+875	Mauv	Subaru	Legacy
+876	Teal	Land Rover	Discovery
+877	Green	Mercedes-Benz	SL-Class
+878	Blue	Chrysler	300
+879	Mauv	Chevrolet	Express 1500
+880	Orange	Mitsubishi	Montero
+881	Khaki	Land Rover	Freelander
+882	Goldenrod	Toyota	4Runner
+883	Aquamarine	Toyota	Tercel
+884	Indigo	GMC	Sierra 1500
+885	Puce	Ford	Econoline E250
+886	Turquoise	Hyundai	Genesis Coupe
+887	Goldenrod	Ford	Thunderbird
+888	Fuscia	Hyundai	Elantra
+889	Purple	Chevrolet	Corvette
+890	Purple	Audi	5000CS
+891	Mauv	Dodge	Challenger
+892	Purple	Jaguar	XJ Series
+893	Yellow	Land Rover	Freelander
+894	Goldenrod	Dodge	Ram 2500
+895	Turquoise	Toyota	Matrix
+896	Puce	MINI	Cooper
+897	Aquamarine	Dodge	Spirit
+898	Fuscia	Toyota	Corolla
+899	Blue	Chrysler	Town & Country
+900	Yellow	Chevrolet	Suburban
+901	Green	Mazda	Tribute
+902	Orange	Ford	Mustang
+903	Crimson	GMC	1500
+904	Fuscia	Mazda	MPV
+905	Crimson	Ford	F250
+906	Violet	Volkswagen	Type 2
+907	Goldenrod	Kia	Rio
+908	Purple	Volkswagen	Rabbit
+909	Purple	Cadillac	DTS
+910	Indigo	Audi	S4
+911	Aquamarine	Oldsmobile	Silhouette
+912	Yellow	Mitsubishi	Montero Sport
+913	Mauv	Dodge	Dakota Club
+914	Yellow	Ford	Edge
+915	Yellow	Porsche	944
+916	Green	Mazda	Miata MX-5
+917	Turquoise	BMW	525
+918	Puce	Nissan	Altima
+919	Pink	Chevrolet	Uplander
+920	Maroon	Honda	Civic
+921	Violet	GMC	2500
+922	Turquoise	Mazda	MX-5
+923	Puce	Volkswagen	Scirocco
+924	Teal	Saab	9-5
+925	Yellow	Land Rover	Range Rover
+926	Green	Ford	Excursion
+927	Maroon	BMW	Z4 M
+928	Pink	GMC	Vandura G1500
+929	Indigo	Chrysler	Voyager
+930	Turquoise	Chrysler	Sebring
+931	Indigo	Pontiac	LeMans
+932	Khaki	Mitsubishi	Truck
+933	Blue	Mercury	Cougar
+934	Purple	Infiniti	Q
+935	Fuscia	Isuzu	i-Series
+936	Maroon	Toyota	Tacoma
+937	Orange	Mercedes-Benz	C-Class
+938	Khaki	Toyota	Echo
+939	Indigo	Chevrolet	3500
+940	Yellow	Porsche	Boxster
+941	Blue	Toyota	Xtra
+942	Violet	Lincoln	Continental Mark VII
+943	Teal	Mitsubishi	Lancer Evolution
+944	Blue	Mitsubishi	Galant
+945	Indigo	Toyota	Yaris
+946	Blue	Nissan	Pathfinder
+947	Goldenrod	Suzuki	Esteem
+948	Red	Chevrolet	Corsica
+949	Blue	Pontiac	Firebird
+950	Turquoise	Maybach	Landaulet
+951	Khaki	Jeep	Grand Cherokee
+952	Green	Ford	F-Series Super Duty
+953	Fuscia	Scion	xD
+954	Orange	Toyota	Prius
+955	Green	Buick	Regal
+956	Red	Infiniti	G
+957	Aquamarine	Geo	Tracker
+958	Khaki	Lotus	Elise
+959	Crimson	Pontiac	Grand Prix
+960	Orange	Ford	Escort
+961	Violet	Kia	Amanti
+962	Mauv	Toyota	Celica
+963	Turquoise	Dodge	Ram Van 1500
+964	Fuscia	Toyota	Avalon
+965	Khaki	Chevrolet	Suburban 1500
+966	Puce	Hummer	H2
+967	Mauv	Volvo	S80
+968	Yellow	Ford	Laser
+969	Maroon	Nissan	240SX
+970	Aquamarine	Lamborghini	Countach
+971	Blue	Buick	Riviera
+972	Puce	BMW	X5 M
+973	Yellow	Pontiac	Grand Prix
+974	Violet	Dodge	Dakota Club
+975	Teal	BMW	1 Series
+976	Indigo	Acura	NSX
+977	Fuscia	Maybach	57
+978	Crimson	Oldsmobile	88
+979	Khaki	Ford	Econoline E150
+980	Green	Honda	Odyssey
+982	Pink	Chevrolet	Suburban 2500
+983	Maroon	Spyker	C8
+984	Red	Chrysler	Town & Country
+985	Turquoise	Ford	Escort ZX2
+986	Blue	Geo	Storm
+987	Indigo	Saturn	S-Series
+988	Violet	Dodge	Ram Van 2500
+989	Khaki	Subaru	Outback
+990	Yellow	Mercedes-Benz	SL-Class
+991	Violet	Chevrolet	Express 1500
+992	Aquamarine	Lincoln	Mark VIII
+993	Crimson	Lincoln	Mark VII
+994	Red	Jeep	Grand Cherokee
+995	Maroon	Scion	tC
+996	Puce	Chevrolet	Corvette
+997	Mauv	Infiniti	FX
+998	Red	Lexus	GS
+999	Turquoise	BMW	6 Series
+1000	Green	Volvo	S60
+\.
+
+
+--
+-- Name: cars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: james
+--
+
+SELECT pg_catalog.setval('cars_id_seq', 1, false);
+
+
+--
+-- Data for Name: trucks; Type: TABLE DATA; Schema: public; Owner: james
+--
+
+COPY trucks (id, color, make, model) FROM stdin;
+1	Orange	Mitsubishi	Eclipse
+2	Indigo	Volvo	S80
+3	Teal	Chrysler	Grand Voyager
+4	Pink	Maserati	228
+5	Turquoise	Pontiac	G3
+6	Violet	Volvo	S40
+7	Pink	Volvo	850
+8	Crimson	Suzuki	Cultus
+9	Mauv	Jaguar	XK Series
+10	Blue	Lincoln	Town Car
+11	Pink	Chevrolet	Cruze
+12	Fuscia	Dodge	Avenger
+13	Blue	Suzuki	Reno
+14	Aquamarine	Toyota	Avalon
+15	Red	Pontiac	Bonneville
+16	Orange	Dodge	Grand Caravan
+17	Goldenrod	Lincoln	Aviator
+18	Maroon	Oldsmobile	Bravada
+19	Mauv	Toyota	T100 Xtra
+20	Maroon	Dodge	Dakota Club
+21	Violet	Honda	FCX Clarity
+22	Fuscia	Pontiac	Gemini
+23	Orange	Mazda	MX-6
+24	Aquamarine	Chevrolet	Blazer
+25	Orange	Lincoln	Navigator
+26	Teal	Porsche	Boxster
+27	Indigo	Subaru	Justy
+28	Crimson	GMC	Sierra 3500HD
+29	Puce	Austin	Mini Cooper
+30	Violet	Pontiac	Bonneville
+31	Aquamarine	Infiniti	G
+32	Khaki	Ford	Expedition EL
+33	Purple	Dodge	Caravan
+34	Goldenrod	Volkswagen	Passat
+35	Teal	Buick	Regal
+36	Crimson	Ford	Probe
+37	Red	GMC	1500 Club Coupe
+38	Violet	Jaguar	XJ Series
+39	Mauv	Jaguar	XJ Series
+40	Red	Jaguar	XK Series
+41	Aquamarine	Mitsubishi	Tredia
+42	Indigo	Buick	Riviera
+43	Indigo	Chevrolet	Corvette
+44	Turquoise	Dodge	Ram Van B250
+45	Khaki	Subaru	Legacy
+46	Teal	Toyota	Celica
+47	Maroon	Ford	Flex
+48	Pink	Ford	F-Series
+49	Turquoise	Mazda	Familia
+50	Purple	Suzuki	Swift
+51	Indigo	Jaguar	XJ
+52	Turquoise	Nissan	Murano
+53	Red	Pontiac	Gemini
+54	Crimson	Hyundai	Sonata
+55	Pink	Geo	Metro
+56	Khaki	Dodge	Grand Caravan
+57	Goldenrod	Mercedes-Benz	SLK-Class
+58	Crimson	Mercury	Topaz
+59	Red	Porsche	Cayman
+60	Mauv	Nissan	Versa
+61	Indigo	Lamborghini	Gallardo
+62	Indigo	Chevrolet	HHR
+63	Pink	Honda	Civic
+64	Yellow	Mercedes-Benz	SLS-Class
+65	Violet	Dodge	Dakota
+66	Fuscia	Mitsubishi	Expo
+67	Orange	Dodge	Ram 1500 Club
+68	Orange	Oldsmobile	Achieva
+69	Blue	Merkur	XR4Ti
+70	Crimson	Mercury	Tracer
+71	Teal	Ford	F-Series
+72	Turquoise	GMC	Savana
+73	Mauv	Honda	Prelude
+74	Goldenrod	Hummer	H3
+75	Fuscia	Infiniti	Q
+76	Crimson	Plymouth	Horizon
+77	Mauv	Dodge	Ram 1500
+78	Puce	Honda	CR-V
+79	Violet	GMC	Sierra 1500
+80	Goldenrod	Audi	Q7
+81	Crimson	Audi	TT
+82	Khaki	Mercedes-Benz	SL-Class
+83	Maroon	Audi	A3
+84	Crimson	Lexus	RX
+85	Aquamarine	Ford	F350
+86	Red	Cadillac	Escalade
+87	Turquoise	Volkswagen	Cabriolet
+88	Aquamarine	Lincoln	Continental
+89	Red	Toyota	Avalon
+90	Pink	Isuzu	i-290
+91	Aquamarine	Hyundai	Sonata
+92	Violet	Toyota	Paseo
+93	Crimson	Acura	TL
+94	Maroon	Mazda	MPV
+95	Goldenrod	Honda	Fit
+96	Yellow	Ford	Bronco II
+97	Orange	Aston Martin	DB9
+98	Fuscia	Mercury	Sable
+99	Maroon	Mitsubishi	Pajero
+100	Green	Acura	MDX
+101	Fuscia	Ford	F-Series Super Duty
+102	Goldenrod	Toyota	Tundra
+103	Orange	Nissan	NV2500
+104	Goldenrod	Ford	F-Series Super Duty
+105	Purple	Mazda	Mazda3
+106	Green	Oldsmobile	Aurora
+107	Orange	Ford	E-Series
+108	Goldenrod	Mercedes-Benz	S-Class
+109	Blue	Pontiac	Firebird
+110	Yellow	Toyota	Matrix
+111	Aquamarine	Volvo	V50
+112	Violet	Isuzu	Rodeo Sport
+113	Red	Buick	Terraza
+114	Violet	Dodge	Neon
+115	Violet	Pontiac	Bonneville
+116	Teal	Saab	9-4X
+117	Orange	Suzuki	XL-7
+118	Puce	BMW	545
+119	Orange	Lincoln	MKX
+120	Teal	Volkswagen	GTI
+121	Blue	Toyota	Tundra
+122	Turquoise	Mitsubishi	Diamante
+123	Orange	Ford	Explorer Sport Trac
+124	Turquoise	Buick	Rainier
+125	Yellow	Mitsubishi	Challenger
+126	Goldenrod	Cadillac	DeVille
+127	Purple	Cadillac	CTS
+128	Maroon	Acura	RL
+129	Indigo	Suzuki	X-90
+130	Puce	Mazda	Mazda5
+131	Teal	Subaru	Alcyone SVX
+132	Indigo	Mazda	Mazda5
+133	Purple	Dodge	Ram 1500
+134	Teal	Mercury	Marauder
+135	Purple	Ford	Mustang
+136	Pink	Ford	Focus
+137	Orange	Infiniti	QX56
+138	Yellow	Subaru	Forester
+139	Indigo	Chevrolet	Venture
+140	Aquamarine	Honda	Insight
+141	Maroon	Alfa Romeo	164
+142	Teal	Mitsubishi	GTO
+143	Goldenrod	Bentley	Continental GT
+144	Teal	Cadillac	Sixty Special
+145	Teal	Mazda	929
+146	Orange	BMW	Z4
+147	Purple	Chevrolet	Suburban
+148	Maroon	Mercedes-Benz	CLK-Class
+149	Mauv	Kia	Rio
+150	Violet	Dodge	Challenger
+151	Aquamarine	Suzuki	Samurai
+152	Blue	Mercury	Milan
+153	Turquoise	Kia	Forte
+154	Green	Ford	Taurus
+155	Teal	Volkswagen	Golf
+156	Puce	Audi	A6
+157	Pink	Pontiac	Firefly
+158	Indigo	Suzuki	Daewoo Lacetti
+159	Puce	Saturn	VUE
+160	Turquoise	Audi	100
+161	Goldenrod	Lamborghini	Gallardo
+162	Red	Mitsubishi	Mighty Max
+163	Blue	Chevrolet	Express 2500
+164	Green	Lamborghini	Gallardo
+165	Green	Acura	Legend
+166	Red	Mercury	Milan
+167	Fuscia	Lexus	CT
+168	Crimson	Volvo	S40
+169	Green	Mazda	Millenia
+170	Orange	Chevrolet	Express 3500
+171	Orange	Mercedes-Benz	E-Class
+172	Mauv	Buick	Skyhawk
+173	Crimson	Chevrolet	TrailBlazer
+174	Blue	Geo	Metro
+175	Purple	Chevrolet	Silverado 2500
+176	Indigo	Mitsubishi	Montero
+177	Aquamarine	Plymouth	Breeze
+178	Goldenrod	Aston Martin	Vantage
+179	Aquamarine	Ford	Explorer Sport Trac
+180	Red	Pontiac	LeMans
+181	Indigo	Ford	Escape
+182	Red	Audi	RS 4
+183	Purple	BMW	530
+184	Purple	Mitsubishi	Galant
+185	Pink	Cadillac	Escalade EXT
+186	Khaki	Chevrolet	Express 3500
+187	Yellow	Isuzu	Amigo
+188	Purple	Mitsubishi	Mirage
+189	Aquamarine	GMC	3500 Club Coupe
+190	Pink	Hyundai	Tiburon
+191	Orange	Land Rover	Range Rover
+192	Turquoise	Chevrolet	Beretta
+193	Mauv	Nissan	370Z
+194	Turquoise	Toyota	Avalon
+195	Turquoise	Mercury	Sable
+196	Pink	Buick	LaCrosse
+197	Aquamarine	BMW	3 Series
+198	Puce	Honda	S2000
+199	Violet	Lexus	RX
+200	Aquamarine	Volkswagen	Passat
+201	Pink	Nissan	Maxima
+202	Maroon	Volkswagen	Passat
+203	Pink	Pontiac	GTO
+204	Mauv	Honda	S2000
+205	Violet	Pontiac	Grand Am
+206	Green	Bentley	Mulsanne
+207	Goldenrod	Eagle	Vision
+208	Yellow	Nissan	Murano
+209	Red	Subaru	Legacy
+210	Fuscia	Mitsubishi	Eclipse
+211	Yellow	Nissan	240SX
+212	Red	Lincoln	Continental
+213	Yellow	Honda	Civic
+214	Pink	Chevrolet	Camaro
+215	Indigo	Lexus	RX
+216	Fuscia	Mitsubishi	Expo LRV
+217	Green	Pontiac	G5
+218	Khaki	Kia	Sephia
+219	Red	BMW	760
+220	Red	Nissan	Sentra
+221	Puce	Saab	9-3
+222	Goldenrod	GMC	Yukon
+223	Violet	Chevrolet	Tahoe
+224	Mauv	Suzuki	Esteem
+225	Yellow	Mercedes-Benz	C-Class
+226	Indigo	Toyota	Tacoma Xtra
+227	Goldenrod	Mazda	626
+228	Puce	Lamborghini	Murciélago
+229	Maroon	Mitsubishi	Pajero
+230	Indigo	GMC	Envoy XL
+231	Puce	Hummer	H3
+232	Turquoise	Bentley	Brooklands
+233	Red	Mazda	Millenia
+234	Goldenrod	Ford	Explorer Sport Trac
+235	Goldenrod	Acura	MDX
+236	Aquamarine	Plymouth	Laser
+237	Yellow	Subaru	Tribeca
+238	Violet	GMC	Savana 1500
+239	Pink	Chevrolet	Silverado 2500
+240	Aquamarine	Bentley	Continental GT
+241	Red	Mazda	Protege
+242	Blue	GMC	Vandura 3500
+243	Maroon	Volkswagen	Golf
+244	Red	Mazda	Mazda6
+245	Pink	Audi	TT
+246	Purple	Subaru	Forester
+247	Fuscia	Volvo	V40
+248	Aquamarine	Pontiac	Torrent
+249	Turquoise	Lexus	RX
+250	Green	Chrysler	Concorde
+251	Yellow	Infiniti	G37
+252	Turquoise	Audi	Quattro
+253	Indigo	Kia	Spectra5
+254	Yellow	GMC	1500 Club Coupe
+255	Green	Lexus	SC
+256	Violet	Volkswagen	Passat
+257	Puce	Suzuki	Swift
+258	Mauv	Nissan	Frontier
+259	Pink	Toyota	Tacoma
+260	Blue	Aston Martin	Rapide
+261	Turquoise	Porsche	911
+262	Violet	Volvo	S80
+263	Pink	Volkswagen	Type 2
+264	Puce	Mitsubishi	Endeavor
+265	Red	Ford	F150
+266	Puce	Audi	Q7
+267	Teal	Chevrolet	Astro
+268	Maroon	Ford	F350
+269	Crimson	Nissan	Altima
+270	Violet	Dodge	Ram Van 1500
+271	Khaki	Kia	Optima
+272	Violet	Geo	Prizm
+273	Khaki	Infiniti	QX
+274	Aquamarine	Toyota	Camry
+275	Orange	Dodge	Ram 1500
+276	Blue	Acura	TSX
+277	Blue	Toyota	Matrix
+278	Goldenrod	Pontiac	Grand Prix
+279	Blue	Eagle	Summit
+280	Teal	BMW	5 Series
+281	Orange	Mitsubishi	Eclipse
+282	Turquoise	Volkswagen	Jetta III
+283	Blue	Ford	F250
+284	Teal	MINI	Cooper Clubman
+285	Violet	Nissan	Murano
+286	Orange	Mitsubishi	Mirage
+287	Violet	Buick	Rendezvous
+288	Teal	Chevrolet	Colorado
+289	Goldenrod	Audi	A5
+290	Yellow	Ford	E-Series
+291	Khaki	Land Rover	Range Rover
+292	Blue	Ford	Explorer
+293	Yellow	GMC	Sierra 1500
+294	Turquoise	Honda	Accord
+295	Teal	Land Rover	LR2
+296	Orange	Audi	A4
+297	Indigo	Mercedes-Benz	600SEL
+298	Pink	Chevrolet	Sportvan G30
+299	Fuscia	Mazda	RX-7
+300	Turquoise	Hyundai	XG350
+301	Khaki	Suzuki	SJ
+302	Teal	Toyota	Paseo
+303	Crimson	Toyota	4Runner
+304	Turquoise	Honda	Crosstour
+305	Red	Hyundai	Genesis Coupe
+306	Fuscia	Toyota	Sienna
+307	Mauv	Ferrari	F430
+308	Turquoise	Lincoln	Continental
+309	Purple	Subaru	Legacy
+310	Khaki	Volvo	S40
+311	Orange	Audi	A6
+312	Aquamarine	Land Rover	Discovery
+313	Yellow	Lincoln	Continental Mark VII
+314	Khaki	Chevrolet	Camaro
+315	Red	Subaru	Impreza
+316	Maroon	Suzuki	Verona
+317	Indigo	Volkswagen	R32
+318	Maroon	Dodge	Ram 1500 Club
+319	Orange	Pontiac	Montana
+320	Teal	Pontiac	6000
+321	Mauv	Subaru	SVX
+322	Pink	GMC	Vandura 3500
+323	Green	Ford	Flex
+324	Purple	Pontiac	Gemini
+325	Violet	Suzuki	Aerio
+326	Aquamarine	Mitsubishi	Eclipse
+327	Blue	Jeep	Cherokee
+328	Yellow	Jaguar	XJ Series
+329	Crimson	BMW	M5
+330	Orange	GMC	Savana 1500
+331	Orange	Honda	Odyssey
+332	Indigo	Buick	Century
+333	Puce	Isuzu	Hombre
+334	Orange	Kia	Amanti
+335	Turquoise	Volkswagen	Cabriolet
+336	Fuscia	Mazda	Miata MX-5
+337	Pink	Mitsubishi	Challenger
+338	Blue	Jaguar	XK
+339	Mauv	Dodge	Ram Van 1500
+340	Green	Maybach	Landaulet
+341	Turquoise	Audi	A6
+342	Turquoise	Mitsubishi	Lancer Evolution
+343	Maroon	Daewoo	Leganza
+344	Fuscia	Pontiac	Montana
+345	Aquamarine	Toyota	Tacoma
+346	Purple	BMW	7 Series
+347	Goldenrod	Pontiac	Firefly
+348	Crimson	Volkswagen	Eos
+349	Goldenrod	Mazda	929
+350	Mauv	Jeep	Grand Cherokee
+351	Maroon	Cadillac	Seville
+352	Blue	Volkswagen	Touareg
+353	Indigo	Ford	Thunderbird
+354	Blue	GMC	Yukon XL 2500
+355	Mauv	Chevrolet	Lumina
+356	Puce	Volvo	V70
+357	Pink	Toyota	Land Cruiser
+358	Indigo	Ford	Taurus
+359	Goldenrod	Acura	NSX
+360	Crimson	Pontiac	Turbo Firefly
+361	Aquamarine	Lincoln	MKZ
+362	Indigo	Mercedes-Benz	W201
+363	Mauv	Infiniti	Q
+364	Orange	Chevrolet	Uplander
+365	Mauv	Studebaker	Avanti
+366	Aquamarine	Bentley	Arnage
+367	Red	Spyker	C8 Spyder
+368	Goldenrod	Chrysler	300
+369	Mauv	Ford	Tempo
+370	Puce	Mitsubishi	Montero Sport
+371	Green	Honda	Odyssey
+372	Green	Mercedes-Benz	GL-Class
+373	Aquamarine	Mercury	Grand Marquis
+374	Fuscia	Suzuki	Forenza
+375	Turquoise	Audi	A3
+376	Yellow	Pontiac	Grand Am
+377	Green	Infiniti	G25
+378	Pink	Toyota	Tacoma
+379	Turquoise	Chrysler	Voyager
+380	Yellow	Chevrolet	Suburban 1500
+381	Pink	Mercedes-Benz	CLK-Class
+382	Purple	Volkswagen	New Beetle
+383	Crimson	Audi	S4
+384	Indigo	GMC	Canyon
+385	Goldenrod	Ford	E-Series
+386	Turquoise	Infiniti	Q
+387	Purple	Ford	Crown Victoria
+388	Turquoise	Mercedes-Benz	Sprinter 2500
+389	Fuscia	GMC	Yukon
+390	Fuscia	Mazda	B-Series Plus
+391	Blue	Subaru	Baja
+392	Teal	Nissan	Altima
+393	Puce	Toyota	Camry
+394	Purple	Subaru	Tribeca
+395	Purple	Maserati	Quattroporte
+396	Fuscia	Saab	9000
+397	Purple	GMC	Sierra 3500
+398	Violet	Chevrolet	Express 1500
+399	Yellow	Audi	Quattro
+400	Pink	Chevrolet	Suburban 2500
+401	Khaki	Mercedes-Benz	600SEL
+402	Crimson	Dodge	Ram Van B150
+403	Blue	Acura	RSX
+404	Indigo	Bugatti	Veyron
+405	Puce	Honda	Civic
+406	Orange	Mazda	626
+407	Purple	Mazda	MX-3
+408	Mauv	Volkswagen	Passat
+409	Mauv	Hyundai	Sonata
+410	Goldenrod	Lincoln	LS
+411	Orange	Audi	A4
+412	Yellow	Pontiac	6000
+413	Orange	Plymouth	Grand Voyager
+414	Khaki	Plymouth	Prowler
+415	Fuscia	Toyota	4Runner
+416	Mauv	Oldsmobile	Intrigue
+417	Blue	Mercedes-Benz	SL-Class
+418	Violet	Audi	100
+419	Goldenrod	Lexus	GX
+420	Maroon	Mercedes-Benz	M-Class
+421	Violet	Chrysler	Town & Country
+422	Maroon	Toyota	Celica
+423	Indigo	Saab	9000
+424	Red	Acura	TSX
+425	Violet	Chevrolet	Monte Carlo
+426	Red	Hyundai	Sonata
+427	Aquamarine	Mercedes-Benz	G-Class
+428	Khaki	Mercedes-Benz	SL-Class
+429	Goldenrod	Mazda	B-Series Plus
+430	Aquamarine	BMW	530
+431	Yellow	Chevrolet	Suburban 1500
+432	Green	Volvo	S40
+433	Aquamarine	Chrysler	LHS
+434	Indigo	Mitsubishi	Eclipse
+435	Indigo	Ford	Torino
+436	Blue	Saab	9-3
+437	Turquoise	Infiniti	J
+438	Red	Lexus	SC
+439	Puce	Mitsubishi	Outlander
+440	Pink	Plymouth	Breeze
+441	Teal	Toyota	Tacoma Xtra
+442	Aquamarine	Saab	9-3
+443	Violet	Jaguar	XK Series
+444	Turquoise	Mitsubishi	Diamante
+445	Crimson	Hyundai	Accent
+446	Mauv	Mazda	Protege
+447	Green	Dodge	Viper
+448	Fuscia	Lexus	GS
+449	Puce	Volkswagen	Tiguan
+450	Khaki	Dodge	Ram 1500 Club
+451	Yellow	Acura	TSX
+452	Violet	Kia	Sedona
+453	Green	Ford	Flex
+454	Aquamarine	Mazda	929
+455	Crimson	Peugeot	207
+456	Puce	GMC	Sierra 1500
+457	Mauv	Mercedes-Benz	SL-Class
+458	Goldenrod	Audi	5000S
+459	Mauv	Subaru	Impreza
+460	Violet	Acura	RDX
+461	Khaki	Buick	Century
+462	Turquoise	Ford	Bronco
+463	Orange	Lotus	Esprit
+464	Indigo	BMW	M5
+465	Teal	Chevrolet	Silverado 2500
+466	Green	Ford	Ranger
+467	Pink	Pontiac	Grand Prix
+468	Indigo	Ford	Ranger
+469	Khaki	Saturn	S-Series
+470	Mauv	Buick	Riviera
+471	Goldenrod	Kia	Sedona
+472	Crimson	Mazda	B2600
+473	Khaki	Dodge	Caravan
+474	Violet	GMC	Sierra 3500
+475	Pink	Dodge	Viper
+476	Teal	Infiniti	G
+477	Green	Mitsubishi	Diamante
+478	Red	Ford	E350
+479	Green	Cadillac	Escalade
+480	Violet	Lexus	SC
+481	Pink	Subaru	Loyale
+482	Maroon	Toyota	Prius
+483	Violet	BMW	X5
+484	Aquamarine	Ford	Explorer
+485	Violet	Jeep	Commander
+486	Yellow	Porsche	911
+487	Yellow	Lincoln	Navigator L
+488	Turquoise	Toyota	Camry Solara
+489	Red	Volkswagen	Golf
+490	Puce	Dodge	Charger
+491	Violet	Nissan	Pathfinder
+492	Puce	Chevrolet	Beretta
+493	Yellow	Mazda	B-Series
+494	Khaki	Dodge	Dakota
+495	Indigo	Toyota	Celica
+496	Violet	Pontiac	Safari
+497	Violet	GMC	Savana
+498	Green	Pontiac	Aztek
+499	Red	Lexus	RX
+500	Red	GMC	Savana 3500
+501	Red	GMC	Savana 2500
+502	Orange	Eagle	Talon
+503	Puce	Hyundai	Elantra
+504	Indigo	Mitsubishi	Diamante
+505	Mauv	Porsche	911
+506	Mauv	GMC	Vandura G2500
+507	Red	Mazda	626
+508	Mauv	Lamborghini	Reventón
+509	Khaki	Mitsubishi	Diamante
+510	Green	Lincoln	LS
+511	Yellow	Mazda	Millenia
+512	Khaki	Hyundai	Accent
+513	Pink	Volvo	850
+514	Khaki	Isuzu	Oasis
+515	Khaki	Ford	E150
+516	Goldenrod	Chevrolet	Corvette
+517	Mauv	Mazda	B2600
+518	Purple	Acura	Integra
+519	Yellow	Volvo	S40
+520	Puce	GMC	Rally Wagon G3500
+521	Orange	Suzuki	Vitara
+522	Red	Ford	Focus
+523	Violet	Volkswagen	Passat
+524	Green	Saab	900
+525	Aquamarine	Subaru	Justy
+526	Fuscia	Maybach	62
+527	Turquoise	Nissan	Murano
+528	Mauv	Toyota	Camry Solara
+529	Turquoise	Mazda	B-Series
+530	Orange	Dodge	Viper
+531	Blue	Chevrolet	Corvette
+532	Teal	Porsche	911
+533	Crimson	Dodge	Dakota
+534	Fuscia	Jaguar	S-Type
+535	Aquamarine	Spyker	C8 Spyder
+536	Fuscia	Lotus	Esprit
+537	Yellow	Porsche	Boxster
+538	Pink	Chrysler	Town & Country
+539	Purple	Buick	Riviera
+540	Goldenrod	Land Rover	Range Rover
+541	Indigo	Honda	S2000
+542	Yellow	Subaru	Outback
+543	Aquamarine	Toyota	FJ Cruiser
+544	Puce	GMC	Rally Wagon 2500
+545	Green	Toyota	Supra
+546	Orange	Volvo	C70
+547	Aquamarine	Volvo	XC70
+548	Maroon	Volkswagen	Jetta
+549	Orange	Porsche	Cayman
+550	Pink	Toyota	Corolla
+551	Turquoise	Ram	3500
+552	Teal	Cadillac	Allante
+553	Fuscia	Dodge	Stratus
+554	Pink	Mercedes-Benz	M-Class
+555	Pink	Audi	Quattro
+556	Blue	Chevrolet	Corvette
+557	Purple	Dodge	Dakota
+558	Purple	Ford	Expedition
+559	Puce	Dodge	Sprinter
+560	Teal	Nissan	Murano
+561	Green	Chevrolet	Caprice
+562	Red	Mitsubishi	Mirage
+563	Green	Toyota	Celica
+564	Turquoise	Ferrari	599 GTB Fiorano
+565	Yellow	Toyota	Corolla
+566	Puce	Mazda	Miata MX-5
+567	Goldenrod	Chrysler	Town & Country
+568	Khaki	Toyota	TundraMax
+569	Maroon	Ford	Explorer Sport Trac
+570	Turquoise	Volkswagen	Corrado
+571	Fuscia	Subaru	Legacy
+572	Khaki	Mazda	Miata MX-5
+573	Goldenrod	Mazda	MX-3
+574	Maroon	Pontiac	Montana
+575	Fuscia	Chevrolet	Monte Carlo
+576	Aquamarine	Hummer	H1
+577	Pink	GMC	Sierra 2500HD
+578	Indigo	Subaru	Alcyone SVX
+579	Crimson	Mitsubishi	Truck
+580	Mauv	Lexus	ES
+581	Turquoise	Pontiac	Solstice
+582	Pink	Volvo	C70
+583	Fuscia	Honda	CR-V
+584	Purple	Chevrolet	Silverado 3500
+585	Turquoise	Lexus	GS
+586	Aquamarine	Pontiac	Tempest
+587	Indigo	Suzuki	Reno
+588	Blue	Ford	Fusion
+589	Fuscia	Cadillac	Escalade ESV
+590	Mauv	GMC	Sierra 3500
+591	Green	Ram	2500
+592	Purple	Lotus	Elise
+593	Fuscia	Honda	Civic
+594	Teal	Oldsmobile	88
+595	Orange	Lincoln	Town Car
+596	Khaki	Oldsmobile	Silhouette
+597	Khaki	Saab	9000
+598	Khaki	GMC	Suburban 1500
+599	Fuscia	Dodge	Durango
+600	Fuscia	Hyundai	Elantra
+601	Teal	Ford	F350
+602	Mauv	Ford	Explorer Sport Trac
+603	Violet	Volkswagen	Touareg
+604	Indigo	Chrysler	Town & Country
+605	Green	Nissan	Sentra
+606	Turquoise	Toyota	Avalon
+607	Red	Mercedes-Benz	E-Class
+608	Violet	Buick	Electra
+609	Fuscia	Mercedes-Benz	E-Class
+610	Violet	Suzuki	Swift
+611	Pink	BMW	7 Series
+612	Puce	Ford	E-Series
+613	Blue	Chevrolet	Express 3500
+614	Turquoise	GMC	Rally Wagon G3500
+615	Fuscia	Ford	Tempo
+616	Turquoise	Ford	Expedition
+617	Orange	Lotus	Esprit
+618	Maroon	Cadillac	Allante
+619	Indigo	Toyota	RAV4
+620	Puce	Audi	100
+621	Teal	Suzuki	Swift
+622	Maroon	Acura	Integra
+623	Goldenrod	Volvo	V50
+624	Turquoise	Mercury	Capri
+625	Maroon	Lincoln	Continental Mark VII
+626	Goldenrod	Pontiac	Sunfire
+627	Khaki	Ford	Econoline E250
+628	Puce	Porsche	Cayenne
+629	Turquoise	Audi	Q5
+630	Pink	Audi	V8
+631	Puce	Chevrolet	Suburban 1500
+632	Khaki	Pontiac	Vibe
+633	Teal	BMW	530
+634	Violet	Maybach	57
+635	Pink	Mercedes-Benz	G-Class
+636	Teal	Ferrari	612 Scaglietti
+637	Teal	Pontiac	Aztek
+638	Blue	Mercury	Mystique
+639	Teal	Chevrolet	Corvette
+640	Purple	Subaru	Legacy
+641	Mauv	Ford	Crown Victoria
+642	Puce	Chevrolet	Astro
+643	Turquoise	BMW	7 Series
+644	Maroon	Toyota	Sequoia
+645	Teal	Cadillac	Escalade EXT
+646	Turquoise	Suzuki	Grand Vitara
+647	Pink	Infiniti	Q
+648	Blue	Chevrolet	Silverado 3500
+649	Mauv	Jeep	Wrangler
+650	Purple	Mazda	MX-3
+651	Goldenrod	Audi	90
+652	Orange	Chevrolet	Cobalt
+653	Puce	Suzuki	Swift
+654	Khaki	Ford	Econoline E350
+655	Green	BMW	7 Series
+656	Turquoise	Lincoln	Mark LT
+657	Orange	Toyota	Corolla
+658	Violet	Mercury	Tracer
+659	Turquoise	Mercury	Sable
+660	Goldenrod	Chrysler	Imperial
+661	Red	Lincoln	Continental Mark VII
+662	Purple	Acura	RL
+663	Indigo	GMC	Rally Wagon 1500
+664	Turquoise	Jeep	Wrangler
+665	Green	Oldsmobile	Achieva
+666	Puce	Infiniti	I
+667	Goldenrod	Chevrolet	G-Series G30
+668	Crimson	Chevrolet	Suburban 2500
+669	Goldenrod	Eagle	Summit
+670	Teal	Dodge	Ram Van 2500
+671	Indigo	Buick	Park Avenue
+672	Red	Cadillac	CTS
+673	Crimson	Subaru	Forester
+674	Aquamarine	Ford	Escape
+675	Violet	Holden	VS Commodore
+676	Puce	Lotus	Exige
+677	Turquoise	GMC	Sierra 2500
+678	Pink	Subaru	SVX
+679	Khaki	Chevrolet	Camaro
+680	Khaki	Dodge	Ram 50
+681	Turquoise	Pontiac	Monterey
+682	Khaki	Volvo	S60
+683	Yellow	Suzuki	Grand Vitara
+684	Puce	Dodge	Charger
+685	Blue	Dodge	Sprinter
+686	Pink	Oldsmobile	98
+687	Blue	Buick	Century
+688	Green	Lexus	LS
+689	Aquamarine	Infiniti	G37
+690	Maroon	Infiniti	QX
+691	Teal	Mercedes-Benz	M-Class
+692	Purple	Volkswagen	Passat
+693	Pink	BMW	5 Series
+694	Orange	BMW	M5
+695	Violet	Hyundai	Accent
+696	Khaki	Ford	Explorer
+697	Puce	Dodge	Intrepid
+698	Maroon	Pontiac	Grand Prix
+699	Orange	Mercedes-Benz	CL-Class
+700	Turquoise	Mercedes-Benz	M-Class
+701	Puce	GMC	Savana 1500
+702	Teal	Oldsmobile	Silhouette
+703	Purple	Volkswagen	Fox
+704	Violet	Lexus	LS
+705	Turquoise	Toyota	Matrix
+706	Mauv	Scion	xA
+707	Mauv	Jaguar	XF
+708	Purple	Mercedes-Benz	CLK-Class
+709	Yellow	Ford	Focus
+710	Violet	Acura	MDX
+711	Crimson	Chrysler	LeBaron
+712	Aquamarine	Dodge	Colt
+713	Yellow	Porsche	Carrera GT
+714	Yellow	Subaru	Legacy
+715	Crimson	Mazda	Mazda5
+716	Teal	Nissan	300ZX
+717	Blue	Spyker	C8
+718	Pink	Nissan	300ZX
+719	Yellow	Toyota	Camry Hybrid
+720	Fuscia	Mercury	Mystique
+721	Puce	Mitsubishi	Galant
+722	Mauv	Mazda	B-Series
+723	Aquamarine	Lincoln	Town Car
+724	Puce	Mercedes-Benz	W201
+725	Red	Infiniti	G37
+726	Puce	Buick	Century
+727	Turquoise	GMC	1500 Club Coupe
+728	Puce	Lincoln	Town Car
+729	Blue	Mitsubishi	Starion
+730	Violet	Chevrolet	Tracker
+731	Violet	Suzuki	Forenza
+732	Purple	Volvo	S40
+733	Crimson	Jaguar	XK Series
+734	Orange	Subaru	XT
+735	Pink	Toyota	Sienna
+736	Red	Audi	V8
+737	Purple	Hyundai	Tucson
+738	Violet	Toyota	TundraMax
+739	Indigo	Suzuki	XL-7
+740	Blue	Nissan	240SX
+741	Maroon	Volkswagen	Phaeton
+742	Goldenrod	Bentley	Arnage
+743	Yellow	Subaru	Loyale
+744	Crimson	Ford	Ranger
+745	Teal	Saturn	Sky
+746	Teal	Mercury	Monterey
+747	Puce	Chevrolet	Blazer
+748	Purple	Maserati	Coupe
+749	Mauv	Toyota	Corolla
+750	Aquamarine	Mercedes-Benz	S-Class
+751	Green	Jeep	Liberty
+752	Pink	Cadillac	DTS
+753	Puce	Lamborghini	Countach
+754	Red	Lotus	Exige
+755	Blue	Mitsubishi	Cordia
+756	Goldenrod	Chevrolet	Uplander
+757	Red	Ford	Bronco
+758	Green	Dodge	Spirit
+759	Violet	Mitsubishi	Chariot
+760	Indigo	Mercedes-Benz	500SL
+761	Turquoise	Pontiac	Grand Prix
+762	Fuscia	Dodge	Dakota
+763	Turquoise	Pontiac	Torrent
+764	Fuscia	Ford	F-Series Super Duty
+765	Purple	Dodge	Ram 2500
+766	Orange	Nissan	Pathfinder
+767	Turquoise	Mitsubishi	GTO
+768	Aquamarine	Mazda	CX-9
+769	Indigo	Lexus	GS
+770	Purple	Nissan	Frontier
+771	Teal	Saab	9000
+772	Violet	Audi	riolet
+773	Indigo	BMW	X3
+774	Purple	Hyundai	Accent
+775	Indigo	Kia	Amanti
+776	Maroon	Dodge	Intrepid
+777	Pink	GMC	Canyon
+778	Pink	Rolls-Royce	Phantom
+779	Indigo	Chevrolet	Silverado 2500
+780	Aquamarine	GMC	Suburban 1500
+781	Blue	Toyota	Sequoia
+782	Mauv	Volkswagen	Type 2
+783	Red	Pontiac	Montana
+784	Yellow	Dodge	Colt
+785	Mauv	Infiniti	Q
+786	Blue	Ferrari	430 Scuderia
+787	Khaki	Volvo	960
+788	Puce	Ford	F-Series
+789	Mauv	Ford	Thunderbird
+790	Maroon	Honda	Civic
+791	Puce	Lincoln	Town Car
+792	Purple	Lincoln	Navigator
+793	Fuscia	Oldsmobile	Achieva
+794	Violet	Chevrolet	Caprice
+795	Fuscia	Acura	CL
+796	Khaki	Volkswagen	Golf
+797	Fuscia	Chevrolet	Malibu
+798	Red	Dodge	Avenger
+799	Yellow	Land Rover	Discovery Series II
+800	Goldenrod	Chrysler	Sebring
+801	Khaki	Land Rover	LR3
+802	Purple	Volkswagen	Cabriolet
+803	Turquoise	Mazda	MX-5
+804	Pink	Toyota	Tundra
+805	Puce	Mercury	Grand Marquis
+806	Mauv	Jaguar	XJ Series
+807	Blue	Pontiac	Firefly
+808	Green	Mazda	Mazda2
+809	Orange	Nissan	200SX
+810	Fuscia	Mercedes-Benz	C-Class
+811	Puce	Austin	Mini Cooper S
+812	Red	Mazda	Mazda6
+813	Purple	Mitsubishi	Galant
+814	Purple	Chevrolet	Silverado 1500
+815	Fuscia	Audi	A3
+816	Orange	Volkswagen	Golf
+817	Goldenrod	Bentley	Mulsanne
+818	Blue	Lexus	LX
+819	Indigo	Porsche	911
+820	Pink	Saab	9-3
+821	Orange	Land Rover	Range Rover Sport
+822	Turquoise	Dodge	Ram 1500
+823	Goldenrod	Acura	RDX
+824	Turquoise	Chrysler	Cirrus
+825	Yellow	Jeep	Compass
+826	Mauv	Acura	MDX
+827	Green	Ford	ZX2
+828	Crimson	Buick	Coachbuilder
+829	Mauv	Kia	Borrego
+830	Orange	Dodge	Caravan
+831	Goldenrod	Aston Martin	DBS
+832	Khaki	Saab	9000
+833	Green	Dodge	Dakota Club
+834	Blue	MINI	Cooper Countryman
+835	Teal	Lexus	LS
+836	Yellow	Scion	xD
+837	Goldenrod	Mazda	Miata MX-5
+838	Pink	Porsche	Boxster
+839	Khaki	Audi	riolet
+840	Blue	Pontiac	Grand Prix
+841	Puce	Kia	Sportage
+842	Fuscia	Acura	TL
+843	Purple	Honda	Accord
+844	Goldenrod	Kia	Sephia
+845	Goldenrod	Audi	TT
+846	Teal	Suzuki	Swift
+847	Red	Dodge	Ram 1500
+848	Blue	Porsche	968
+849	Orange	Oldsmobile	Achieva
+850	Turquoise	Mazda	Navajo
+851	Aquamarine	Mercedes-Benz	CL-Class
+852	Pink	Toyota	Tundra
+853	Indigo	Lotus	Elan
+854	Yellow	Chevrolet	Monte Carlo
+855	Violet	GMC	Canyon
+856	Indigo	Porsche	911
+857	Maroon	MINI	MINI
+858	Orange	Saturn	Sky
+859	Blue	Chevrolet	Caprice Classic
+860	Goldenrod	Hyundai	Accent
+861	Yellow	Pontiac	Bonneville
+862	Violet	Plymouth	Sundance
+863	Blue	Plymouth	Laser
+864	Turquoise	Cadillac	CTS
+865	Purple	Ford	Ranger
+866	Purple	Dodge	Grand Caravan
+867	Goldenrod	Subaru	Justy
+868	Goldenrod	Maybach	57
+869	Fuscia	Hyundai	Equus
+870	Puce	GMC	1500 Club Coupe
+871	Fuscia	Chevrolet	Impala
+872	Blue	Pontiac	Montana
+873	Khaki	Dodge	Ram 3500 Club
+874	Crimson	Hyundai	Accent
+875	Teal	Subaru	Tribeca
+876	Turquoise	Acura	NSX
+877	Blue	Mercedes-Benz	C-Class
+878	Crimson	Buick	Electra
+879	Teal	Mitsubishi	Outlander Sport
+880	Indigo	Kia	Rio
+881	Mauv	Saab	9-5
+882	Goldenrod	Nissan	Titan
+883	Aquamarine	Ford	F450
+884	Khaki	Chevrolet	Express 2500
+885	Turquoise	Suzuki	SJ
+886	Violet	Buick	LeSabre
+887	Teal	Mazda	MX-6
+888	Pink	Hyundai	Sonata
+889	Khaki	Pontiac	Firebird
+890	Puce	Toyota	RAV4
+891	Teal	GMC	Savana 1500
+892	Indigo	Honda	Odyssey
+893	Orange	Daewoo	Nubira
+894	Fuscia	Buick	Skylark
+895	Turquoise	Mazda	Mazda5
+896	Goldenrod	Suzuki	SX4
+897	Yellow	Dodge	Caravan
+898	Crimson	Toyota	Camry
+899	Orange	Mercedes-Benz	SLR McLaren
+900	Khaki	Dodge	Grand Caravan
+901	Orange	Suzuki	X-90
+902	Goldenrod	Dodge	D150 Club
+903	Green	Oldsmobile	88
+904	Crimson	Volvo	XC70
+905	Maroon	Chevrolet	Camaro
+906	Indigo	Buick	Regal
+907	Aquamarine	Mercedes-Benz	300TE
+908	Indigo	Jaguar	XJ
+909	Violet	Ford	Torino
+910	Goldenrod	Buick	Century
+911	Teal	Oldsmobile	Achieva
+912	Violet	Audi	80
+913	Orange	GMC	Savana
+914	Mauv	Jaguar	XJ Series
+915	Maroon	Infiniti	G
+916	Maroon	Chevrolet	Sportvan G30
+917	Pink	Nissan	Maxima
+918	Violet	Pontiac	Grand Prix
+919	Goldenrod	Eagle	Talon
+920	Orange	Land Rover	Range Rover
+921	Purple	Mercedes-Benz	G-Class
+922	Teal	Ford	F350
+923	Crimson	GMC	Sierra 1500
+924	Goldenrod	Cadillac	XLR-V
+925	Blue	Nissan	NV2500
+926	Mauv	Mercury	Mystique
+927	Crimson	Saturn	L-Series
+928	Yellow	Pontiac	Grand Am
+929	Crimson	Audi	Quattro
+930	Purple	Subaru	Alcyone SVX
+931	Pink	Volkswagen	Phaeton
+932	Puce	Volkswagen	Jetta
+933	Maroon	Buick	Regal
+934	Puce	GMC	2500
+935	Mauv	Isuzu	Space
+936	Mauv	Oldsmobile	Bravada
+937	Violet	Ford	Bronco
+938	Teal	Volvo	960
+939	Green	Buick	Century
+940	Mauv	BMW	530
+941	Red	Land Rover	Range Rover
+942	Aquamarine	Honda	Pilot
+943	Crimson	Honda	Insight
+944	Crimson	Hyundai	Elantra
+945	Violet	Ford	Galaxie
+946	Fuscia	Geo	Prizm
+947	Orange	Lexus	LX
+948	Orange	Subaru	Loyale
+949	Purple	Mercedes-Benz	R-Class
+950	Mauv	Mercedes-Benz	R-Class
+951	Purple	Toyota	Corolla
+952	Purple	Saturn	VUE
+953	Red	Maserati	GranTurismo
+954	Turquoise	Mercury	Grand Marquis
+955	Mauv	Chevrolet	Colorado
+956	Yellow	Maserati	GranSport
+957	Khaki	Buick	Century
+958	Crimson	Ford	Taurus
+959	Maroon	Ford	LTD Crown Victoria
+960	Purple	Ford	Expedition
+961	Orange	Pontiac	Aztek
+962	Mauv	Hummer	H1
+963	Puce	Subaru	Tribeca
+964	Yellow	Audi	200
+965	Blue	Pontiac	Grand Prix
+966	Green	Buick	Skyhawk
+967	Mauv	GMC	Sierra 2500
+968	Crimson	Volvo	XC70
+969	Green	Lexus	LS
+970	Turquoise	Mazda	Familia
+971	Crimson	Ford	Expedition
+972	Puce	Chevrolet	Malibu
+973	Orange	Buick	Coachbuilder
+974	Indigo	Audi	TT
+975	Aquamarine	Mercedes-Benz	W201
+976	Red	Mazda	323
+977	Red	Nissan	Sentra
+978	Pink	Dodge	Caravan
+979	Teal	GMC	Sierra 1500
+980	Maroon	Ford	Thunderbird
+981	Blue	Mazda	626
+982	Red	Chevrolet	Camaro
+983	Indigo	Kia	Sportage
+984	Turquoise	Pontiac	G8
+985	Puce	Lexus	LX
+986	Pink	Audi	A3
+987	Purple	Geo	Metro
+988	Fuscia	Volvo	XC70
+989	Red	Pontiac	Firefly
+990	Yellow	Land Rover	Range Rover
+991	Crimson	Dodge	Grand Caravan
+992	Turquoise	Chevrolet	Suburban 2500
+993	Crimson	MINI	Cooper Countryman
+994	Purple	Subaru	Forester
+995	Yellow	GMC	Savana 2500
+996	Indigo	Audi	RS 4
+997	Puce	Toyota	Tacoma Xtra
+998	Maroon	Ford	Explorer Sport Trac
+999	Yellow	Land Rover	Defender
+1000	Teal	Ford	Aerostar
+\.
+
+
+--
+-- Name: trucks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: james
+--
+
+SELECT pg_catalog.setval('trucks_id_seq', 1, false);
+
+
+--
+-- Name: cars cars_pkey; Type: CONSTRAINT; Schema: public; Owner: james
+--
+
+ALTER TABLE ONLY cars
+    ADD CONSTRAINT cars_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: trucks trucks_pkey; Type: CONSTRAINT; Schema: public; Owner: james
+--
+
+ALTER TABLE ONLY trucks
+    ADD CONSTRAINT trucks_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

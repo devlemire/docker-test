@@ -10,4 +10,4 @@ RUN yarn
 
 EXPOSE 3000
  
-CMD ["./initialize.sh"]
+CMD ["./initialize-dev.sh"]

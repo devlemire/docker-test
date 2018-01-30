@@ -1,13 +1,43 @@
 version: "3"
 services:
   webapp:
-    image: mhart/alpine-node
-    container_name: my-web-container
+    container_name: my-web-dev-environment
     build:
       context: .
+      dockerfile: Dockerfile-dev
     ports:
       - "3000:3000"
       - "35729:35729"
     volumes:
       - './:/var/app'
-
+    links:
+      - postgres
+    depends_on:
+      - postgres
+      - server
+  server:
+    container_name: my-web-server
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    ports: 
+      - "3001:3001"
+    volumes:
+      - './:/var/server'
+    links:
+      - postgres
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:9.6
+    restart: always
+    container_name: my-web-database
+    environment:
+      POSTGRES_USER: james
+      POSTGRES_PASSWORD: swag1234
+      POSTGRES_DB: docker_db
+    volumes:
+      - ./docker_db:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    
