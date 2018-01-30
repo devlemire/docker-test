@@ -1,1 +1,6 @@
 node_modules
+.gitignore
+.travis.yml
+deploy.sh
+id_rsa.enc
+src/
