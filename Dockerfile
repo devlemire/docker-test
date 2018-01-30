@@ -1,11 +1,11 @@
 FROM mhart/alpine-node
 
-MAINTAINER DevMountain
- 
+LABEL maintainer="DevMountain"
+
 WORKDIR /var/app
 
 COPY . .
- 
+
 RUN yarn
 
 EXPOSE 3000
