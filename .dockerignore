@@ -4,4 +4,3 @@ node_modules
 deploy.sh
 id_rsa.enc
 public
-.git
